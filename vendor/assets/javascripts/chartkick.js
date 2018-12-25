@@ -8,9 +8,10 @@
 
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global.Chartkick = factory());
-}(this, (function () { 'use strict';
+    typeof define === 'function' && define.amd ? define(factory) :
+      (global.Chartkick = factory());
+}(this, (function () {
+  'use strict';
 
   function isArray(variable) {
     return Object.prototype.toString.call(variable) === "[object Array]";
@@ -116,10 +117,10 @@
       } else {
         n = toStr(n);
         if ((matches = n.match(DATE_PATTERN))) {
-        year = parseInt(matches[1], 10);
-        month = parseInt(matches[3], 10) - 1;
-        day = parseInt(matches[5], 10);
-        return new Date(year, month, day);
+          year = parseInt(matches[1], 10);
+          month = parseInt(matches[3], 10) - 1;
+          day = parseInt(matches[5], 10);
+          return new Date(year, month, day);
         } else { // str
           // try our best to get the str into iso8601
           // TODO be smarter about this
@@ -283,7 +284,7 @@
       callbacks: {}
     },
     legend: {},
-    title: {fontSize: 20, fontColor: "#333"}
+    title: { fontSize: 20, fontColor: "#333" }
   };
 
   var defaultOptions = {
@@ -376,7 +377,7 @@
   };
 
   // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-  var addOpacity = function(hex, opacity) {
+  var addOpacity = function (hex, opacity) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? "rgba(" + parseInt(result[1], 16) + ", " + parseInt(result[2], 16) + ", " + parseInt(result[3], 16) + ", " + opacity + ")" : hex;
   };
@@ -400,7 +401,7 @@
     }
   };
 
-  var setFormatOptions = function(chart, options, chartType) {
+  var setFormatOptions = function (chart, options, chartType) {
     var formatOptions = {
       prefix: chart.options.prefix,
       suffix: chart.options.suffix,
@@ -637,11 +638,11 @@
           options.scales.xAxes[0].time.unit = "day";
           step = 1;
         } else if (hour || timeDiff > 0.5) {
-          options.scales.xAxes[0].time.displayFormats = {hour: "MMM D, h a"};
+          options.scales.xAxes[0].time.displayFormats = { hour: "MMM D, h a" };
           options.scales.xAxes[0].time.unit = "hour";
           step = 1 / 24.0;
         } else if (minute) {
-          options.scales.xAxes[0].time.displayFormats = {minute: "h:mm a"};
+          options.scales.xAxes[0].time.displayFormats = { minute: "h:mm a" };
           options.scales.xAxes[0].time.unit = "minute";
           step = 1 / 24.0 / 60.0;
         }
@@ -679,7 +680,7 @@
     this.library = library;
   };
 
-  defaultExport.prototype.renderLineChart = function renderLineChart (chart, chartType) {
+  defaultExport.prototype.renderLineChart = function renderLineChart(chart, chartType) {
     var chartOptions = {};
     // fix for https://github.com/chartjs/Chart.js/issues/2441
     if (!chart.options.max && allZeros(chart.data)) {
@@ -701,7 +702,7 @@
     this.drawChart(chart, "line", data, options);
   };
 
-  defaultExport.prototype.renderPieChart = function renderPieChart (chart) {
+  defaultExport.prototype.renderPieChart = function renderPieChart(chart) {
     var options = merge({}, baseOptions);
     if (chart.options.donut) {
       options.cutoutPercentage = 50;
@@ -740,7 +741,7 @@
     this.drawChart(chart, "pie", data, options);
   };
 
-  defaultExport.prototype.renderColumnChart = function renderColumnChart (chart, chartType) {
+  defaultExport.prototype.renderColumnChart = function renderColumnChart(chart, chartType) {
     var options;
     if (chartType === "bar") {
       options = jsOptionsFunc(merge(baseOptions, defaultOptions), hideLegend, setTitle, setBarMin, setBarMax, setStacked, setXtitle, setYtitle)(chart, chart.options);
@@ -755,15 +756,15 @@
     this.drawChart(chart, (chartType === "bar" ? "horizontalBar" : "bar"), data, options);
   };
 
-  defaultExport.prototype.renderAreaChart = function renderAreaChart (chart) {
+  defaultExport.prototype.renderAreaChart = function renderAreaChart(chart) {
     this.renderLineChart(chart, "area");
   };
 
-  defaultExport.prototype.renderBarChart = function renderBarChart (chart) {
+  defaultExport.prototype.renderBarChart = function renderBarChart(chart) {
     this.renderColumnChart(chart, "bar");
   };
 
-  defaultExport.prototype.renderScatterChart = function renderScatterChart (chart, chartType) {
+  defaultExport.prototype.renderScatterChart = function renderScatterChart(chart, chartType) {
     chartType = chartType || "scatter";
 
     var options = jsOptions(chart, chart.options);
@@ -781,17 +782,17 @@
     this.drawChart(chart, chartType, data, options);
   };
 
-  defaultExport.prototype.renderBubbleChart = function renderBubbleChart (chart) {
+  defaultExport.prototype.renderBubbleChart = function renderBubbleChart(chart) {
     this.renderScatterChart(chart, "bubble");
   };
 
-  defaultExport.prototype.destroy = function destroy (chart) {
+  defaultExport.prototype.destroy = function destroy(chart) {
     if (chart.chart) {
       chart.chart.destroy();
     }
   };
 
-  defaultExport.prototype.drawChart = function drawChart (chart, type, data, options) {
+  defaultExport.prototype.drawChart = function drawChart(chart, type, data, options) {
     this.destroy(chart);
 
     var chartOptions = {
@@ -896,7 +897,7 @@
 
   var jsOptions$1 = jsOptionsFunc(defaultOptions$1, hideLegend$1, setTitle$1, setMin$1, setMax$1, setStacked$1, setXtitle$1, setYtitle$1);
 
-  var setFormatOptions$1 = function(chart, options, chartType) {
+  var setFormatOptions$1 = function (chart, options, chartType) {
     var formatOptions = {
       prefix: chart.options.prefix,
       suffix: chart.options.suffix,
@@ -922,7 +923,7 @@
     this.library = library;
   };
 
-  defaultExport$1.prototype.renderLineChart = function renderLineChart (chart, chartType) {
+  defaultExport$1.prototype.renderLineChart = function renderLineChart(chart, chartType) {
     chartType = chartType || "spline";
     var chartOptions = {};
     if (chartType === "areaspline") {
@@ -967,7 +968,7 @@
           data[j][0] = data[j][0].getTime();
         }
       }
-      series[i].marker = {symbol: "circle"};
+      series[i].marker = { symbol: "circle" };
       if (chart.options.points === false) {
         series[i].marker.enabled = false;
       }
@@ -976,20 +977,20 @@
     this.drawChart(chart, series, options);
   };
 
-  defaultExport$1.prototype.renderScatterChart = function renderScatterChart (chart) {
+  defaultExport$1.prototype.renderScatterChart = function renderScatterChart(chart) {
     var options = jsOptions$1(chart, chart.options, {});
     options.chart.type = "scatter";
     this.drawChart(chart, chart.data, options);
   };
 
-  defaultExport$1.prototype.renderPieChart = function renderPieChart (chart) {
+  defaultExport$1.prototype.renderPieChart = function renderPieChart(chart) {
     var chartOptions = merge(defaultOptions$1, {});
 
     if (chart.options.colors) {
       chartOptions.colors = chart.options.colors;
     }
     if (chart.options.donut) {
-      chartOptions.plotOptions = {pie: {innerSize: "50%"}};
+      chartOptions.plotOptions = { pie: { innerSize: "50%" } };
     }
 
     if ("legend" in chart.options) {
@@ -1011,7 +1012,7 @@
     this.drawChart(chart, series, options);
   };
 
-  defaultExport$1.prototype.renderColumnChart = function renderColumnChart (chart, chartType) {
+  defaultExport$1.prototype.renderColumnChart = function renderColumnChart(chart, chartType) {
     chartType = chartType || "column";
     var series = chart.data;
     var options = jsOptions$1(chart, chart.options), i, j, s, d, rows = [], categories = [];
@@ -1058,21 +1059,21 @@
     this.drawChart(chart, newSeries, options);
   };
 
-  defaultExport$1.prototype.renderBarChart = function renderBarChart (chart) {
+  defaultExport$1.prototype.renderBarChart = function renderBarChart(chart) {
     this.renderColumnChart(chart, "bar");
   };
 
-  defaultExport$1.prototype.renderAreaChart = function renderAreaChart (chart) {
+  defaultExport$1.prototype.renderAreaChart = function renderAreaChart(chart) {
     this.renderLineChart(chart, "areaspline");
   };
 
-  defaultExport$1.prototype.destroy = function destroy (chart) {
+  defaultExport$1.prototype.destroy = function destroy(chart) {
     if (chart.chart) {
       chart.chart.destroy();
     }
   };
 
-  defaultExport$1.prototype.drawChart = function drawChart (chart, data, options) {
+  defaultExport$1.prototype.drawChart = function drawChart(chart, data, options) {
     this.destroy(chart);
 
     options.chart.renderTo = chart.element.id;
@@ -1149,7 +1150,7 @@
 
   var setTitle$2 = function (options, title) {
     options.title = title;
-    options.titleTextStyle = {color: "#333", fontSize: "20px"};
+    options.titleTextStyle = { color: "#333", fontSize: "20px" };
   };
 
   var setMin$2 = function (options, min) {
@@ -1198,8 +1199,8 @@
     this.library = library;
   };
 
-  defaultExport$2.prototype.renderLineChart = function renderLineChart (chart) {
-      var this$1 = this;
+  defaultExport$2.prototype.renderLineChart = function renderLineChart(chart) {
+    var this$1 = this;
 
     this.waitForLoaded(chart, function () {
       var chartOptions = {};
@@ -1219,8 +1220,8 @@
     });
   };
 
-  defaultExport$2.prototype.renderPieChart = function renderPieChart (chart) {
-      var this$1 = this;
+  defaultExport$2.prototype.renderPieChart = function renderPieChart(chart) {
+    var this$1 = this;
 
     this.waitForLoaded(chart, function () {
       var chartOptions = {
@@ -1253,8 +1254,8 @@
     });
   };
 
-  defaultExport$2.prototype.renderColumnChart = function renderColumnChart (chart) {
-      var this$1 = this;
+  defaultExport$2.prototype.renderColumnChart = function renderColumnChart(chart) {
+    var this$1 = this;
 
     this.waitForLoaded(chart, function () {
       var options = jsOptions$2(chart, chart.options);
@@ -1264,8 +1265,8 @@
     });
   };
 
-  defaultExport$2.prototype.renderBarChart = function renderBarChart (chart) {
-      var this$1 = this;
+  defaultExport$2.prototype.renderBarChart = function renderBarChart(chart) {
+    var this$1 = this;
 
     this.waitForLoaded(chart, function () {
       var chartOptions = {
@@ -1282,8 +1283,8 @@
     });
   };
 
-  defaultExport$2.prototype.renderAreaChart = function renderAreaChart (chart) {
-      var this$1 = this;
+  defaultExport$2.prototype.renderAreaChart = function renderAreaChart(chart) {
+    var this$1 = this;
 
     this.waitForLoaded(chart, function () {
       var chartOptions = {
@@ -1299,14 +1300,15 @@
     });
   };
 
-  defaultExport$2.prototype.renderGeoChart = function renderGeoChart (chart) {
-      var this$1 = this;
+  defaultExport$2.prototype.renderGeoChart = function renderGeoChart(chart) {
+    var this$1 = this;
 
     this.waitForLoaded(chart, function () {
       var chartOptions = {
         legend: "none",
         colorAxis: {
           colors: chart.options.colors || ["#f6c7b6", "#ce502d"]
+          values: chart.options.color_values || []
         }
       };
       var options = merge(merge(defaultOptions$2, chartOptions), chart.options.library || {});
@@ -1320,8 +1322,8 @@
     });
   };
 
-  defaultExport$2.prototype.renderScatterChart = function renderScatterChart (chart) {
-      var this$1 = this;
+  defaultExport$2.prototype.renderScatterChart = function renderScatterChart(chart) {
+    var this$1 = this;
 
     this.waitForLoaded(chart, function () {
       var chartOptions = {};
@@ -1350,8 +1352,8 @@
     });
   };
 
-  defaultExport$2.prototype.renderTimeline = function renderTimeline (chart) {
-      var this$1 = this;
+  defaultExport$2.prototype.renderTimeline = function renderTimeline(chart) {
+    var this$1 = this;
 
     this.waitForLoaded(chart, "timeline", function () {
       var chartOptions = {
@@ -1364,9 +1366,9 @@
       var options = merge(merge(defaultOptions$2, chartOptions), chart.options.library || {});
 
       var data = new this$1.library.visualization.DataTable();
-      data.addColumn({type: "string", id: "Name"});
-      data.addColumn({type: "date", id: "Start"});
-      data.addColumn({type: "date", id: "End"});
+      data.addColumn({ type: "string", id: "Name" });
+      data.addColumn({ type: "date", id: "Start" });
+      data.addColumn({ type: "date", id: "End" });
       data.addRows(chart.data);
 
       chart.element.style.lineHeight = "normal";
@@ -1375,13 +1377,13 @@
     });
   };
 
-  defaultExport$2.prototype.destroy = function destroy (chart) {
+  defaultExport$2.prototype.destroy = function destroy(chart) {
     if (chart.chart) {
       chart.chart.clearChart();
     }
   };
 
-  defaultExport$2.prototype.drawChart = function drawChart (chart, type, data, options) {
+  defaultExport$2.prototype.drawChart = function drawChart(chart, type, data, options) {
     this.destroy(chart);
 
     if (chart.options.code) {
@@ -1394,15 +1396,15 @@
     });
   };
 
-  defaultExport$2.prototype.waitForLoaded = function waitForLoaded (chart, pack, callback) {
-      var this$1 = this;
+  defaultExport$2.prototype.waitForLoaded = function waitForLoaded(chart, pack, callback) {
+    var this$1 = this;
 
     if (!callback) {
       callback = pack;
       pack = "corechart";
     }
 
-    callbacks.push({pack: pack, callback: callback});
+    callbacks.push({ pack: pack, callback: callback });
 
     if (loaded[pack]) {
       this.runCallbacks();
@@ -1426,8 +1428,8 @@
     }
   };
 
-  defaultExport$2.prototype.runCallbacks = function runCallbacks () {
-      var this$1 = this;
+  defaultExport$2.prototype.runCallbacks = function runCallbacks() {
+    var this$1 = this;
 
     var cb, call;
     for (var i = 0; i < callbacks.length; i++) {
@@ -1442,7 +1444,7 @@
   };
 
   // cant use object as key
-  defaultExport$2.prototype.createDataTable = function createDataTable (series, columnType) {
+  defaultExport$2.prototype.createDataTable = function createDataTable(series, columnType) {
     var i, j, s, d, key, rows = [], sortedLabels = [];
     for (i = 0; i < series.length; i++) {
       s = series[i];
@@ -1618,7 +1620,7 @@
     chart.__downloadAttached = true;
 
     // mouseenter
-    chart.__enterEvent = addEvent(element, "mouseover", function(e) {
+    chart.__enterEvent = addEvent(element, "mouseover", function (e) {
       var related = e.relatedTarget;
       // check download option again to ensure it wasn't changed
       if ((!related || (related !== this && !childOf(this, related))) && chart.options.download) {
@@ -1628,7 +1630,7 @@
     });
 
     // mouseleave
-    chart.__leaveEvent = addEvent(element, "mouseout", function(e) {
+    chart.__leaveEvent = addEvent(element, "mouseout", function (e) {
       var related = e.relatedTarget;
       if (!related || (related !== this && !childOf(this, related))) {
         if (link.parentNode) {
@@ -1644,9 +1646,9 @@
       elem.addEventListener(event, fn, false);
       return fn;
     } else {
-      var fn2 = function() {
+      var fn2 = function () {
         // set the this pointer same as addEventListener when fn is called
-        return(fn.call(elem, window.event));
+        return (fn.call(elem, window.event));
       };
       elem.attachEvent("on" + event, fn2);
       return fn2;
@@ -1831,7 +1833,7 @@
 
     // see if one series or multiple
     if (!isArray(series) || typeof series[0] !== "object" || isArray(series[0])) {
-      series = [{name: opts.label, data: series}];
+      series = [{ name: opts.label, data: series }];
       chart.hideLegend = true;
     } else {
       chart.hideLegend = false;
@@ -1880,31 +1882,31 @@
     }
   };
 
-  Chart.prototype.getElement = function getElement () {
+  Chart.prototype.getElement = function getElement() {
     return this.element;
   };
 
-  Chart.prototype.getDataSource = function getDataSource () {
+  Chart.prototype.getDataSource = function getDataSource() {
     return this.dataSource;
   };
 
-  Chart.prototype.getData = function getData () {
+  Chart.prototype.getData = function getData() {
     return this.data;
   };
 
-  Chart.prototype.getOptions = function getOptions () {
+  Chart.prototype.getOptions = function getOptions() {
     return this.options;
   };
 
-  Chart.prototype.getChartObject = function getChartObject () {
+  Chart.prototype.getChartObject = function getChartObject() {
     return this.chart;
   };
 
-  Chart.prototype.getAdapter = function getAdapter () {
+  Chart.prototype.getAdapter = function getAdapter() {
     return this.adapter;
   };
 
-  Chart.prototype.updateData = function updateData (dataSource, options) {
+  Chart.prototype.updateData = function updateData(dataSource, options) {
     this.dataSource = dataSource;
     if (options) {
       this.__updateOptions(options);
@@ -1912,16 +1914,16 @@
     fetchDataSource(this, dataSource);
   };
 
-  Chart.prototype.setOptions = function setOptions (options) {
+  Chart.prototype.setOptions = function setOptions(options) {
     this.__updateOptions(options);
     this.redraw();
   };
 
-  Chart.prototype.redraw = function redraw () {
+  Chart.prototype.redraw = function redraw() {
     fetchDataSource(this, this.rawData);
   };
 
-  Chart.prototype.refreshData = function refreshData () {
+  Chart.prototype.refreshData = function refreshData() {
     if (typeof this.dataSource === "string") {
       // prevent browser from caching
       var sep = this.dataSource.indexOf("?") === -1 ? "?" : "&";
@@ -1930,14 +1932,14 @@
     }
   };
 
-  Chart.prototype.startRefresh = function startRefresh () {
-      var this$1 = this;
+  Chart.prototype.startRefresh = function startRefresh() {
+    var this$1 = this;
 
     var refresh = this.options.refresh;
 
     if (!this.intervalId) {
       if (refresh) {
-        this.intervalId = setInterval( function () {
+        this.intervalId = setInterval(function () {
           this$1.refreshData();
         }, refresh * 1000);
       } else {
@@ -1946,14 +1948,14 @@
     }
   };
 
-  Chart.prototype.stopRefresh = function stopRefresh () {
+  Chart.prototype.stopRefresh = function stopRefresh() {
     if (this.intervalId) {
       clearInterval(this.intervalId);
       this.intervalId = null;
     }
   };
 
-  Chart.prototype.toImage = function toImage () {
+  Chart.prototype.toImage = function toImage() {
     if (this.adapter === "chartjs") {
       return this.chart.toBase64Image();
     } else {
@@ -1961,7 +1963,7 @@
     }
   };
 
-  Chart.prototype.destroy = function destroy () {
+  Chart.prototype.destroy = function destroy() {
     if (this.__adapterObject) {
       this.__adapterObject.destroy(this);
     }
@@ -1975,7 +1977,7 @@
     }
   };
 
-  Chart.prototype.__updateOptions = function __updateOptions (options) {
+  Chart.prototype.__updateOptions = function __updateOptions(options) {
     var updateRefresh = options.refresh && options.refresh !== this.options.refresh;
     this.options = merge(Chartkick.options, options);
     if (updateRefresh) {
@@ -1984,29 +1986,29 @@
     }
   };
 
-  Chart.prototype.__render = function __render () {
+  Chart.prototype.__render = function __render() {
     this.data = this.__processData();
     renderChart(this.__chartName(), this);
   };
 
-  Chart.prototype.__config = function __config () {
+  Chart.prototype.__config = function __config() {
     return config;
   };
 
   var LineChart = (function (Chart) {
-    function LineChart () {
+    function LineChart() {
       Chart.apply(this, arguments);
     }
 
-    if ( Chart ) LineChart.__proto__ = Chart;
-    LineChart.prototype = Object.create( Chart && Chart.prototype );
+    if (Chart) LineChart.__proto__ = Chart;
+    LineChart.prototype = Object.create(Chart && Chart.prototype);
     LineChart.prototype.constructor = LineChart;
 
-    LineChart.prototype.__processData = function __processData () {
+    LineChart.prototype.__processData = function __processData() {
       return processSeries(this);
     };
 
-    LineChart.prototype.__chartName = function __chartName () {
+    LineChart.prototype.__chartName = function __chartName() {
       return "LineChart";
     };
 
@@ -2014,19 +2016,19 @@
   }(Chart));
 
   var PieChart = (function (Chart) {
-    function PieChart () {
+    function PieChart() {
       Chart.apply(this, arguments);
     }
 
-    if ( Chart ) PieChart.__proto__ = Chart;
-    PieChart.prototype = Object.create( Chart && Chart.prototype );
+    if (Chart) PieChart.__proto__ = Chart;
+    PieChart.prototype = Object.create(Chart && Chart.prototype);
     PieChart.prototype.constructor = PieChart;
 
-    PieChart.prototype.__processData = function __processData () {
+    PieChart.prototype.__processData = function __processData() {
       return processSimple(this);
     };
 
-    PieChart.prototype.__chartName = function __chartName () {
+    PieChart.prototype.__chartName = function __chartName() {
       return "PieChart";
     };
 
@@ -2034,19 +2036,19 @@
   }(Chart));
 
   var ColumnChart = (function (Chart) {
-    function ColumnChart () {
+    function ColumnChart() {
       Chart.apply(this, arguments);
     }
 
-    if ( Chart ) ColumnChart.__proto__ = Chart;
-    ColumnChart.prototype = Object.create( Chart && Chart.prototype );
+    if (Chart) ColumnChart.__proto__ = Chart;
+    ColumnChart.prototype = Object.create(Chart && Chart.prototype);
     ColumnChart.prototype.constructor = ColumnChart;
 
-    ColumnChart.prototype.__processData = function __processData () {
+    ColumnChart.prototype.__processData = function __processData() {
       return processSeries(this, null, true);
     };
 
-    ColumnChart.prototype.__chartName = function __chartName () {
+    ColumnChart.prototype.__chartName = function __chartName() {
       return "ColumnChart";
     };
 
@@ -2054,19 +2056,19 @@
   }(Chart));
 
   var BarChart = (function (Chart) {
-    function BarChart () {
+    function BarChart() {
       Chart.apply(this, arguments);
     }
 
-    if ( Chart ) BarChart.__proto__ = Chart;
-    BarChart.prototype = Object.create( Chart && Chart.prototype );
+    if (Chart) BarChart.__proto__ = Chart;
+    BarChart.prototype = Object.create(Chart && Chart.prototype);
     BarChart.prototype.constructor = BarChart;
 
-    BarChart.prototype.__processData = function __processData () {
+    BarChart.prototype.__processData = function __processData() {
       return processSeries(this, null, true);
     };
 
-    BarChart.prototype.__chartName = function __chartName () {
+    BarChart.prototype.__chartName = function __chartName() {
       return "BarChart";
     };
 
@@ -2074,19 +2076,19 @@
   }(Chart));
 
   var AreaChart = (function (Chart) {
-    function AreaChart () {
+    function AreaChart() {
       Chart.apply(this, arguments);
     }
 
-    if ( Chart ) AreaChart.__proto__ = Chart;
-    AreaChart.prototype = Object.create( Chart && Chart.prototype );
+    if (Chart) AreaChart.__proto__ = Chart;
+    AreaChart.prototype = Object.create(Chart && Chart.prototype);
     AreaChart.prototype.constructor = AreaChart;
 
-    AreaChart.prototype.__processData = function __processData () {
+    AreaChart.prototype.__processData = function __processData() {
       return processSeries(this);
     };
 
-    AreaChart.prototype.__chartName = function __chartName () {
+    AreaChart.prototype.__chartName = function __chartName() {
       return "AreaChart";
     };
 
@@ -2094,19 +2096,19 @@
   }(Chart));
 
   var GeoChart = (function (Chart) {
-    function GeoChart () {
+    function GeoChart() {
       Chart.apply(this, arguments);
     }
 
-    if ( Chart ) GeoChart.__proto__ = Chart;
-    GeoChart.prototype = Object.create( Chart && Chart.prototype );
+    if (Chart) GeoChart.__proto__ = Chart;
+    GeoChart.prototype = Object.create(Chart && Chart.prototype);
     GeoChart.prototype.constructor = GeoChart;
 
-    GeoChart.prototype.__processData = function __processData () {
+    GeoChart.prototype.__processData = function __processData() {
       return processSimple(this);
     };
 
-    GeoChart.prototype.__chartName = function __chartName () {
+    GeoChart.prototype.__chartName = function __chartName() {
       return "GeoChart";
     };
 
@@ -2114,19 +2116,19 @@
   }(Chart));
 
   var ScatterChart = (function (Chart) {
-    function ScatterChart () {
+    function ScatterChart() {
       Chart.apply(this, arguments);
     }
 
-    if ( Chart ) ScatterChart.__proto__ = Chart;
-    ScatterChart.prototype = Object.create( Chart && Chart.prototype );
+    if (Chart) ScatterChart.__proto__ = Chart;
+    ScatterChart.prototype = Object.create(Chart && Chart.prototype);
     ScatterChart.prototype.constructor = ScatterChart;
 
-    ScatterChart.prototype.__processData = function __processData () {
+    ScatterChart.prototype.__processData = function __processData() {
       return processSeries(this, "number");
     };
 
-    ScatterChart.prototype.__chartName = function __chartName () {
+    ScatterChart.prototype.__chartName = function __chartName() {
       return "ScatterChart";
     };
 
@@ -2134,19 +2136,19 @@
   }(Chart));
 
   var BubbleChart = (function (Chart) {
-    function BubbleChart () {
+    function BubbleChart() {
       Chart.apply(this, arguments);
     }
 
-    if ( Chart ) BubbleChart.__proto__ = Chart;
-    BubbleChart.prototype = Object.create( Chart && Chart.prototype );
+    if (Chart) BubbleChart.__proto__ = Chart;
+    BubbleChart.prototype = Object.create(Chart && Chart.prototype);
     BubbleChart.prototype.constructor = BubbleChart;
 
-    BubbleChart.prototype.__processData = function __processData () {
+    BubbleChart.prototype.__processData = function __processData() {
       return processSeries(this, "bubble");
     };
 
-    BubbleChart.prototype.__chartName = function __chartName () {
+    BubbleChart.prototype.__chartName = function __chartName() {
       return "BubbleChart";
     };
 
@@ -2154,15 +2156,15 @@
   }(Chart));
 
   var Timeline = (function (Chart) {
-    function Timeline () {
+    function Timeline() {
       Chart.apply(this, arguments);
     }
 
-    if ( Chart ) Timeline.__proto__ = Chart;
-    Timeline.prototype = Object.create( Chart && Chart.prototype );
+    if (Chart) Timeline.__proto__ = Chart;
+    Timeline.prototype = Object.create(Chart && Chart.prototype);
     Timeline.prototype.constructor = Timeline;
 
-    Timeline.prototype.__processData = function __processData () {
+    Timeline.prototype.__processData = function __processData() {
       var i, data = this.rawData;
       for (i = 0; i < data.length; i++) {
         data[i][1] = toDate(data[i][1]);
@@ -2171,7 +2173,7 @@
       return data;
     };
 
-    Timeline.prototype.__chartName = function __chartName () {
+    Timeline.prototype.__chartName = function __chartName() {
       return "Timeline";
     };
 
